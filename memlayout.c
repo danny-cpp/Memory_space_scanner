@@ -8,35 +8,25 @@
 
 static const unsigned long mem_space = 0xffffffff;
 static const unsigned long page_size = 0x4000;
-static sigjmp_buf point1;
+static sigjmp_buf point;
 static sigjmp_buf point2;
 
 void NO_ACCESS_bypass(int signo, siginfo_t *info, void *context) {
-    siglongjmp(point1, 1);
-    return;
-}
-
-void RO_bypass(int signo, siginfo_t *info, void *context) {
-    siglongjmp(point2, 1);
+    siglongjmp(point, 1);
     return;
 }
 
 int get_mem_layout(struct memregion *regions, unsigned int size) {
 
     int steps = (int) (mem_space/page_size);
-    unsigned volatile char* tracer = 0x00;
-    struct sigaction act1;
-    struct sigaction act2;
+    unsigned volatile char* tracer = 0x00; // 0x911c000
+    struct sigaction act;
 
-    // This one to bypass seg fault when trying to access
-    act1.sa_sigaction = NO_ACCESS_bypass;
-    act1.sa_flags = SA_NODEFER;
-    sigaction(SIGSEGV, &act1, NULL);
 
-    // This one to bypass seg fault when trying to write
-    act2.sa_sigaction = RO_bypass;
-    act2.sa_flags = SA_NODEFER;
-    sigaction(SIGSEGV, &act2, NULL);
+    act.sa_sigaction = NO_ACCESS_bypass;
+    act.sa_flags = SA_NODEFER;
+    sigaction(SIGSEGV, &act, NULL);
+
 
     #if DEBUG
         steps = 100000;
@@ -45,20 +35,20 @@ int get_mem_layout(struct memregion *regions, unsigned int size) {
     #endif
 
     int previous_permission = MEM_NO;
-    int current_permission = MEM_NO;
+    int current_permission = previous_permission;
     unsigned volatile char* mem_region_entry = tracer;
     for (int i = 0; i < steps; i++) {
 
 
         // Attempting to access the data. If no permission -> seg fault.
-        if (sigsetjmp(point1, 0) == 0) {
+        if (sigsetjmp(point, 0) == 0) {
             char content = *tracer;
 
             // Once the reading is successful, we know the page is readable (write is still unknown)
             current_permission = MEM_RO;
 
             // Attempting to write to the data. If no permission -> seg fault
-            if (sigsetjmp(point2, 0) == 0) {
+            if (sigsetjmp(point, 0) == 0) {
                 tracer[0] = content;
 
                 // If the upper successfully wrote back the data, this block is RW
@@ -80,7 +70,10 @@ int get_mem_layout(struct memregion *regions, unsigned int size) {
             struct memregion tmp = {mem_region_entry, tracer - 1, previous_permission};
             printf("The memregion spans from %p to %p with permission %d\n", tmp.from,
                    tmp.to, tmp.mode);
-            break;
+            // break;
+
+            previous_permission = current_permission;
+            mem_region_entry = tracer;
         }
 
         tracer += page_size;
