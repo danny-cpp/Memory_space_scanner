@@ -7,6 +7,10 @@
 #IncludeRegexTransform: 
 
 /mnt/d/Study/DEV/C/assign1/memlayout.c
+setjmp.h
+-
+signal.h
+-
 memlayout.h
 /mnt/d/Study/DEV/C/assign1/memlayout.h
 stdio.h
