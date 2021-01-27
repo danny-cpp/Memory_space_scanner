@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/mnt/d/Study/DEV/C/assign1/memlayout.c
+memlayout.h
+/mnt/d/Study/DEV/C/assign1/memlayout.h
+stdio.h
+/mnt/d/Study/DEV/C/assign1/stdio.h
+
+/mnt/d/Study/DEV/C/assign1/memlayout.h
+
