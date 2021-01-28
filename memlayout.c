@@ -37,7 +37,7 @@ int get_mem_layout(struct memregion *regions, unsigned int size) {
     int previous_permission = MEM_NO;
     int current_permission = previous_permission;
     unsigned volatile char* mem_region_entry = tracer;
-    for (unsigned long i = 0; i < steps; i++) {
+    for (unsigned long i = 0; i <= steps; i++) {
 
 
         // Attempting to access the data. If no permission -> seg fault.
@@ -77,10 +77,22 @@ int get_mem_layout(struct memregion *regions, unsigned int size) {
         }
 
         tracer += page_size;
+
     }
 
-    tracer -= 1;
+    // To test the last region (from ??? -> 0xffffffff) we have to check explicitly, since
+    // the loop causes out of bound memory (2^32 instead 2^32 -1)
+    // Attempting to access the data. If no permission -> seg fault.
+    tracer = 0xffffffff;
+
+    struct memregion tmp = {mem_region_entry, tracer, previous_permission};
+    printf("The memregion spans from %p to %p with permission %d\n", tmp.from,
+           tmp.to, tmp.mode);
+
+
+
     printf("Tracer is at %p\n", tracer);
+    printf("Last mem entry was %p\n", mem_region_entry);
 
 }
 
