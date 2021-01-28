@@ -18,7 +18,7 @@ void NO_ACCESS_bypass(int signo, siginfo_t *info, void *context) {
 
 int get_mem_layout(struct memregion *regions, unsigned int size) {
 
-    int steps = (int) (mem_space/page_size);
+    unsigned long steps = mem_space/page_size;
     unsigned volatile char* tracer = 0x00; // 0x911c000
     struct sigaction act;
 
@@ -29,7 +29,7 @@ int get_mem_layout(struct memregion *regions, unsigned int size) {
 
 
     #if DEBUG
-        steps = 100000;
+        steps = 1048576;
         printf("Pointer is currently at %p\n", tracer);
         // printf("Pointer content is %d\n", *tracer);
     #endif
@@ -37,7 +37,7 @@ int get_mem_layout(struct memregion *regions, unsigned int size) {
     int previous_permission = MEM_NO;
     int current_permission = previous_permission;
     unsigned volatile char* mem_region_entry = tracer;
-    for (int i = 0; i < steps; i++) {
+    for (unsigned long i = 0; i < steps; i++) {
 
 
         // Attempting to access the data. If no permission -> seg fault.
@@ -79,6 +79,7 @@ int get_mem_layout(struct memregion *regions, unsigned int size) {
         tracer += page_size;
     }
 
+    tracer -= 1;
     printf("Tracer is at %p\n", tracer);
 
 }
