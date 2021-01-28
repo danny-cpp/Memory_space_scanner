@@ -9,12 +9,9 @@
 static const unsigned long mem_space = 0xffffffff;
 static const unsigned long page_size = 0x4000;
 static sigjmp_buf point;
-static sigjmp_buf point2;
 
-void NO_ACCESS_bypass(int signo, siginfo_t *info, void *context) {
-    siglongjmp(point, 1);
-    return;
-}
+void NO_ACCESS_bypass(int signo, siginfo_t *info, void *context);
+
 
 int get_mem_layout(struct memregion *regions, unsigned int size) {
 
@@ -59,18 +56,18 @@ int get_mem_layout(struct memregion *regions, unsigned int size) {
             }
         }
         else {
-            // printf("No accessible memregion\n");
             current_permission = MEM_NO;
-            // break;
         }
 
         // This dictates a region ends
         if (current_permission != previous_permission) {
             // First we construct a mem_region object
             struct memregion tmp = {mem_region_entry, tracer - 1, previous_permission};
-            printf("The memregion spans from %p to %p with permission %d\n", tmp.from,
-                   tmp.to, tmp.mode);
-            // break;
+
+            #if DEBUG
+                printf("The memregion spans from %p to %p with permission %d\n", tmp.from,
+                        tmp.to, tmp.mode);
+            #endif
 
             previous_permission = current_permission;
             mem_region_entry = tracer;
@@ -86,13 +83,18 @@ int get_mem_layout(struct memregion *regions, unsigned int size) {
     tracer = 0xffffffff;
 
     struct memregion tmp = {mem_region_entry, tracer, previous_permission};
-    printf("The memregion spans from %p to %p with permission %d\n", tmp.from,
-           tmp.to, tmp.mode);
+
+    #if DEBUG
+        printf("The memregion spans from %p to %p with permission %d\n", tmp.from,
+               tmp.to, tmp.mode);
 
 
 
-    printf("Tracer is at %p\n", tracer);
-    printf("Last mem entry was %p\n", mem_region_entry);
-
+        printf("Tracer is at %p\n", tracer);
+        printf("Last mem entry was %p\n", mem_region_entry);
+    #endif
 }
 
+void NO_ACCESS_bypass(int signo, siginfo_t *info, void *context) {
+    siglongjmp(point, 1);
+}
