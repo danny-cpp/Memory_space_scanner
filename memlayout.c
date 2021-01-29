@@ -3,18 +3,24 @@
 #include "memlayout.h"
 #include "stdio.h"
 
-#define DEBUG 1
+#define DEBUG 0
 
 
-static const unsigned long mem_space = 0xffffffff;
-static const unsigned long page_size = 0x4000;
+static const unsigned long long mem_space = 1ULL<<32;
+static const unsigned long long page_size = 4096;
 static sigjmp_buf point;
 
 void NO_ACCESS_bypass(int signo, siginfo_t *info, void *context);
 
 int get_mem_layout(struct memregion *regions, unsigned int size) {
 
+    if (size == 0)
+        return -2;
+
+    unsigned int counter = 0;
+
     unsigned long steps = mem_space/page_size;
+    // printf("Steps are %d\n", steps);
     unsigned volatile char* tracer = 0x00; // 0x911c000
     struct sigaction act;
 
@@ -67,6 +73,13 @@ int get_mem_layout(struct memregion *regions, unsigned int size) {
                         tmp.to, tmp.mode);
             #endif
 
+            // Store it to the array
+            regions[counter] = tmp;
+            counter++;
+            if (counter == size) {
+                return 0;
+            }
+
             previous_permission = current_permission;
             mem_region_entry = tracer;
         }
@@ -80,19 +93,38 @@ int get_mem_layout(struct memregion *regions, unsigned int size) {
     // Attempting to access the data. If no permission -> seg fault.
     tracer = 0xffffffff;
 
+
     struct memregion tmp = {mem_region_entry, tracer, previous_permission};
+    regions[counter] = tmp;
+    counter++;
+
 
     #if DEBUG
         printf("The memregion spans from %p to %p with permission %d\n", tmp.from,
                tmp.to, tmp.mode);
-
-
-
         printf("Tracer is at %p\n", tracer);
         printf("Last mem entry was %p\n", mem_region_entry);
     #endif
+
+    if (counter == size)
+        return 0;
+    else
+        return -1;
 }
 
 void NO_ACCESS_bypass(int signo, siginfo_t *info, void *context) {
     siglongjmp(point, 1);
+}
+
+void print_memregion(struct memregion region) {
+    printf("%p-%p ", region.from, region.to);
+    if (region.mode == 0) {
+        printf(" RW\n");
+    }
+    else if (region.mode == 1) {
+        printf(" RO\n");
+    }
+    else {
+        printf(" NO\n");
+    }
 }
