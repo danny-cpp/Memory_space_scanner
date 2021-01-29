@@ -12,18 +12,16 @@ static sigjmp_buf point;
 
 void NO_ACCESS_bypass(int signo, siginfo_t *info, void *context);
 
-
 int get_mem_layout(struct memregion *regions, unsigned int size) {
 
     unsigned long steps = mem_space/page_size;
     unsigned volatile char* tracer = 0x00; // 0x911c000
     struct sigaction act;
 
-
     act.sa_sigaction = NO_ACCESS_bypass;
     act.sa_flags = SA_NODEFER;
     sigaction(SIGSEGV, &act, NULL);
-
+    sigaction(SIGBUS, &act, NULL);
 
     #if DEBUG
         steps = 1048576;
