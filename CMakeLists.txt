@@ -6,6 +6,6 @@ set(CMAKE_C_STANDARD 11)
 include_directories(.)
 
 add_executable(assign1
-        driver.c
+        mem_1.c
         memlayout.c
         memlayout.h)

@@ -2,7 +2,11 @@
 #include <stdlib.h>
 #include "memlayout.h"
 
-
+/**
+ * In this example, we comparing the effect of malloc. The memory map will be different before and after
+ * 1,000,000 int allocation and initialization.
+ * @return
+ */
 int main() {
     /**
      * Allocation an memregion struct array on heap have been tested and needs to be
@@ -10,13 +14,13 @@ int main() {
      *
      * For bigger array please use the other commented block to construct it on the heap
      */
-    unsigned int array_size = 17;
+    unsigned int array_size = 20;
 
     printf("Memory before massive malloc:\n");
     // struct memregion results[array_size];
 
     /**
-     * Uncomment this part for array_size >= 20;
+     * Using this part for array_size >= 20;
      */
     struct memregion* results = (struct memregion*)malloc(array_size * sizeof(struct memregion));
 

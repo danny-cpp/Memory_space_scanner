@@ -3,7 +3,7 @@
 #include "memlayout.h"
 #include "stdio.h"
 
-#define DEBUG 1
+#define DEBUG 0 // Turn debug on for in-depth analysis
 
 
 static const unsigned long long mem_space = 1ULL<<32;

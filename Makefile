@@ -1,13 +1,13 @@
 CC = gcc
-CFLAGS = -O0 -g -Wall -m32
+override CFLAGS += -O0 -g -Wall -m32
 
-all: a.out
+all: mem_1
 
-a.out: driver.o memlayout.o
-	$(CC) -o a.out driver.o memlayout.o $(CFLAGS)
+mem_1: mem_1.o memlayout.o
+	$(CC) -o a.out mem_1.o memlayout.o $(CFLAGS)
 
-driver.o: driver.c
-	$(CC) -c driver.c -o driver.o $(CFLAGS)
+mem_1.o: mem_1.c
+	$(CC) -c mem_1.c -o mem_1.o $(CFLAGS)
 
 memlayout.o: memlayout.h memlayout.c
 	$(CC) -c memlayout.c -o memlayout.o $(CFLAGS)
