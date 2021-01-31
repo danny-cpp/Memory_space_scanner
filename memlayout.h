@@ -3,6 +3,10 @@
 #define MEM_RO 1
 #define MEM_NO 2
 
+#ifndef USER_PAGE_SIZE
+#define USER_PAGE_SIZE 4096
+#endif
+
 struct memregion {
 	void *from;
 	void *to;

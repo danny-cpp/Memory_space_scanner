@@ -3,11 +3,11 @@
 #include "memlayout.h"
 #include "stdio.h"
 
-#define DEBUG 0
+#define DEBUG 1
 
 
 static const unsigned long long mem_space = 1ULL<<32;
-static const unsigned long long page_size = 4096;
+static const unsigned long long page_size = USER_PAGE_SIZE;
 static sigjmp_buf point;
 
 void NO_ACCESS_bypass(int signo, siginfo_t *info, void *context);
@@ -20,7 +20,12 @@ int get_mem_layout(struct memregion *regions, unsigned int size) {
     unsigned int counter = 0;
 
     unsigned long steps = mem_space/page_size;
-    // printf("Steps are %d\n", steps);
+    #if DEBUG
+        printf("\nDEBUG STATUS STARTING REPORT\n");
+        printf("User define page size is %llu\n", page_size);
+        printf("Calculated steps are %lu\n", steps);
+        printf("====================================\n\n");
+    #endif
     unsigned volatile char* tracer = 0x00; // 0x911c000
     struct sigaction act;
 
@@ -30,9 +35,8 @@ int get_mem_layout(struct memregion *regions, unsigned int size) {
     sigaction(SIGBUS, &act, NULL);
 
     #if DEBUG
-        steps = 1048576;
+        // steps = 1048576;
         printf("Pointer is currently at %p\n", tracer);
-        // printf("Pointer content is %d\n", *tracer);
     #endif
 
     int previous_permission = MEM_NO;
@@ -77,6 +81,14 @@ int get_mem_layout(struct memregion *regions, unsigned int size) {
             regions[counter] = tmp;
             counter++;
             if (counter == size) {
+                #if DEBUG
+                    printf("The memregion spans from %p to %p with permission %d\n", tmp.from,
+                           tmp.to, tmp.mode);
+                    printf("\n========================================\n");
+                    printf("END OF DEBUG STATUS REPORT\n");
+                    printf("Tracer is at %p\n", tracer);
+                    printf("Recorded %d memregions\n\n", counter);
+                #endif
                 return 0;
             }
 
@@ -102,8 +114,10 @@ int get_mem_layout(struct memregion *regions, unsigned int size) {
     #if DEBUG
         printf("The memregion spans from %p to %p with permission %d\n", tmp.from,
                tmp.to, tmp.mode);
+        printf("\n========================================\n");
+        printf("END OF DEBUG STATUS REPORT\n");
         printf("Tracer is at %p\n", tracer);
-        printf("Last mem entry was %p\n", mem_region_entry);
+        printf("Recorded %d memregions\n\n", counter);
     #endif
 
     if (counter == size)
@@ -117,14 +131,21 @@ void NO_ACCESS_bypass(int signo, siginfo_t *info, void *context) {
 }
 
 void print_memregion(struct memregion region) {
+    if (region.from == 0 && region.to == 0) {
+        printf("Empty slot\n");
+        return;
+    }
     printf("%p-%p ", region.from, region.to);
     if (region.mode == 0) {
         printf(" RW\n");
+        return;
     }
     else if (region.mode == 1) {
         printf(" RO\n");
+        return;
     }
     else {
         printf(" NO\n");
+        return;
     }
 }
