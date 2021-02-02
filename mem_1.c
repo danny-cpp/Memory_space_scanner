@@ -5,6 +5,7 @@
 /**
  * In this example, we comparing the effect of malloc. The memory map will be different before and after
  * 1,000,000 int allocation and initialization.
+ * @author: Danh Nguyen
  * @return
  */
 int main() {

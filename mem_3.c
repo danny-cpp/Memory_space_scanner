@@ -6,11 +6,16 @@
 #include <sys/mman.h>
 #include "memlayout.h"
 
+/**
+ * Loading a large data file onto memory via mmap()
+ * @param path
+ */
 void mem_loading(const char* path);
 
 /**
  * In this example, mmap() a large data file and observe the memory changing. Project includes a
  * 300KB json data file as an example. If no argument is provided, the file is default to Tags.json
+ * @author: Danh Nguyen
  * @return
  */
 int main(int argc, char *argv[]) {
@@ -46,7 +51,6 @@ int main(int argc, char *argv[]) {
 
     memregion_compare(before, after, array_size);
 
-    // mem_loading();
 }
 
 void mem_loading(const char* path) {

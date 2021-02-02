@@ -7,30 +7,15 @@ static void *handle;
 struct memregion* after;
 int array_size;
 
+/**
+ * Dynamically loaded library. This causes memory layout to be altered at run time
+ */
 void dynamicLoadingExample();
 
-int recursionExample(int upto) {
-    if (upto == 0) {
-        printf("\nRecursive call reached base case!!\n");
-        printf("Current memory map is:\n");
-        // get_mem_layout(recursion_array, array_size);
-        //
-        // for (unsigned int i = 0; i < array_size; i++) {
-        //     print_memregion(recursion_array[i]);
-        // }
-
-        return -1;
-    }
-    int a[10000];
-
-
-    // printf("Current upto is %d\n", upto);
-    return recursionExample(upto - 1);
-}
-
 /**
- * In this example, we will consider the recursive call. The memory map before will be
- * different from after the recursion call
+ * In this example, we will consider dynamic load. The memory map before will be
+ * different from after the dynamic loading
+ * @author: Danh Nguyen
  * @return
  */
 int main() {
@@ -49,8 +34,6 @@ int main() {
 
     dynamicLoadingExample();
 
-
-
     for (unsigned int i = 0; i < array_size; i++) {
         print_memregion(after[i]);
     }
@@ -58,6 +41,11 @@ int main() {
     memregion_compare(after, before, array_size);
 }
 
+/**
+ * Code snippet in courtesy of Lab3 - Memory Mapped Files, CMPUT 379, University of Alberta,
+ * Winter 2021.
+ * @authors: Matt Gallivan and Yan Wang
+ */
 void dynamicLoadingExample() {
     double (*cosine)(double);
     handle = dlopen("/usr/lib32/libm.so", RTLD_LAZY);
