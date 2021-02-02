@@ -76,18 +76,18 @@ include CMakeFiles/assign1.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/assign1.dir/flags.make
 
-CMakeFiles/assign1.dir/driver.c.o: CMakeFiles/assign1.dir/flags.make
-CMakeFiles/assign1.dir/driver.c.o: ../driver.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/d/Study/DEV/C/assign1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/assign1.dir/driver.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/assign1.dir/driver.c.o -c /mnt/d/Study/DEV/C/assign1/driver.c
+CMakeFiles/assign1.dir/mem_1.c.o: CMakeFiles/assign1.dir/flags.make
+CMakeFiles/assign1.dir/mem_1.c.o: ../mem_1.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/d/Study/DEV/C/assign1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/assign1.dir/mem_1.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/assign1.dir/mem_1.c.o -c /mnt/d/Study/DEV/C/assign1/mem_1.c
 
-CMakeFiles/assign1.dir/driver.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/assign1.dir/driver.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/d/Study/DEV/C/assign1/driver.c > CMakeFiles/assign1.dir/driver.c.i
+CMakeFiles/assign1.dir/mem_1.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/assign1.dir/mem_1.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/d/Study/DEV/C/assign1/mem_1.c > CMakeFiles/assign1.dir/mem_1.c.i
 
-CMakeFiles/assign1.dir/driver.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/assign1.dir/driver.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/d/Study/DEV/C/assign1/driver.c -o CMakeFiles/assign1.dir/driver.c.s
+CMakeFiles/assign1.dir/mem_1.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/assign1.dir/mem_1.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/d/Study/DEV/C/assign1/mem_1.c -o CMakeFiles/assign1.dir/mem_1.c.s
 
 CMakeFiles/assign1.dir/memlayout.c.o: CMakeFiles/assign1.dir/flags.make
 CMakeFiles/assign1.dir/memlayout.c.o: ../memlayout.c
@@ -104,13 +104,13 @@ CMakeFiles/assign1.dir/memlayout.c.s: cmake_force
 
 # Object files for target assign1
 assign1_OBJECTS = \
-"CMakeFiles/assign1.dir/driver.c.o" \
+"CMakeFiles/assign1.dir/mem_1.c.o" \
 "CMakeFiles/assign1.dir/memlayout.c.o"
 
 # External object files for target assign1
 assign1_EXTERNAL_OBJECTS =
 
-assign1: CMakeFiles/assign1.dir/driver.c.o
+assign1: CMakeFiles/assign1.dir/mem_1.c.o
 assign1: CMakeFiles/assign1.dir/memlayout.c.o
 assign1: CMakeFiles/assign1.dir/build.make
 assign1: CMakeFiles/assign1.dir/link.txt

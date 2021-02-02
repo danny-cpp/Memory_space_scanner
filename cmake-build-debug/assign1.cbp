@@ -78,7 +78,7 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/mnt/d/Study/DEV/C/assign1/driver.c">
+		<Unit filename="/mnt/d/Study/DEV/C/assign1/mem_1.c">
 			<Option target="assign1"/>
 		</Unit>
 		<Unit filename="/mnt/d/Study/DEV/C/assign1/memlayout.c">

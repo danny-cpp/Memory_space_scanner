@@ -149,3 +149,18 @@ void print_memregion(struct memregion region) {
         return;
     }
 }
+
+void memregion_compare(struct memregion *region1, struct memregion *region2, int len) {
+    for (int i = 0; i < len; i++) {
+        if (region1[i].from != region2[i].from || region1[i].to != region2[i].to
+            || region1[i].mode != region2[i].mode) {
+            printf("\nDetected difference:\n");
+            print_memregion(region1[i]);
+            printf("compare to\n");
+            print_memregion(region2[i]);
+            printf("\n");
+            return;
+        }
+    }
+    printf("NO DIFFERENCE!\n");
+}

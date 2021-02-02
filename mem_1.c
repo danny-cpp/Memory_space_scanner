@@ -17,16 +17,18 @@ int main() {
     unsigned int array_size = 20;
 
     printf("Memory before massive malloc:\n");
-    // struct memregion results[array_size];
+    // struct memregion after[array_size];
 
     /**
      * Using this part for array_size >= 20;
      */
-    struct memregion* results = (struct memregion*)malloc(array_size * sizeof(struct memregion));
+    struct memregion* after = (struct memregion*)malloc(array_size * sizeof(struct memregion));
+    struct memregion* before = (struct memregion*)malloc(array_size * sizeof(struct memregion));
 
-    int status = get_mem_layout(results, array_size);
+
+    int status = get_mem_layout(before, array_size);
     for (unsigned int i = 0; i < array_size; i++) {
-        print_memregion(results[i]);
+        print_memregion(before[i]);
     }
 
     printf("\nMemory after massive malloc:\n");
@@ -37,11 +39,12 @@ int main() {
     }
 
 
-    get_mem_layout(results, array_size);
+    get_mem_layout(after, array_size);
     for (unsigned int i = 0; i < array_size; i++) {
-        print_memregion(results[i]);
+        print_memregion(after[i]);
     }
 
+    memregion_compare(before, after, array_size);
 }
 
 

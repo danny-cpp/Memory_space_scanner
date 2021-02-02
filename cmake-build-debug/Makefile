@@ -142,32 +142,32 @@ assign1/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/assign1.dir/build.make CMakeFiles/assign1.dir/build
 .PHONY : assign1/fast
 
-driver.o: driver.c.o
+mem_1.o: mem_1.c.o
 
-.PHONY : driver.o
+.PHONY : mem_1.o
 
 # target to build an object file
-driver.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/assign1.dir/build.make CMakeFiles/assign1.dir/driver.c.o
-.PHONY : driver.c.o
+mem_1.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/assign1.dir/build.make CMakeFiles/assign1.dir/mem_1.c.o
+.PHONY : mem_1.c.o
 
-driver.i: driver.c.i
+mem_1.i: mem_1.c.i
 
-.PHONY : driver.i
+.PHONY : mem_1.i
 
 # target to preprocess a source file
-driver.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/assign1.dir/build.make CMakeFiles/assign1.dir/driver.c.i
-.PHONY : driver.c.i
+mem_1.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/assign1.dir/build.make CMakeFiles/assign1.dir/mem_1.c.i
+.PHONY : mem_1.c.i
 
-driver.s: driver.c.s
+mem_1.s: mem_1.c.s
 
-.PHONY : driver.s
+.PHONY : mem_1.s
 
 # target to generate assembly for a file
-driver.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/assign1.dir/build.make CMakeFiles/assign1.dir/driver.c.s
-.PHONY : driver.c.s
+mem_1.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/assign1.dir/build.make CMakeFiles/assign1.dir/mem_1.c.s
+.PHONY : mem_1.c.s
 
 memlayout.o: memlayout.c.o
 
@@ -205,9 +205,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... assign1"
-	@echo "... driver.o"
-	@echo "... driver.i"
-	@echo "... driver.s"
+	@echo "... mem_1.o"
+	@echo "... mem_1.i"
+	@echo "... mem_1.s"
 	@echo "... memlayout.o"
 	@echo "... memlayout.i"
 	@echo "... memlayout.s"

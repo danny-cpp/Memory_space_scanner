@@ -26,3 +26,5 @@ struct memregion {
 int get_mem_layout (struct memregion *regions, unsigned int size);
 
 void print_memregion(struct memregion region);
+
+void memregion_compare(struct memregion *region1, struct memregion *region2, int len);
