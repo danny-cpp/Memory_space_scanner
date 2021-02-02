@@ -169,6 +169,60 @@ mem_1.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/assign1.dir/build.make CMakeFiles/assign1.dir/mem_1.c.s
 .PHONY : mem_1.c.s
 
+mem_2.o: mem_2.c.o
+
+.PHONY : mem_2.o
+
+# target to build an object file
+mem_2.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/assign1.dir/build.make CMakeFiles/assign1.dir/mem_2.c.o
+.PHONY : mem_2.c.o
+
+mem_2.i: mem_2.c.i
+
+.PHONY : mem_2.i
+
+# target to preprocess a source file
+mem_2.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/assign1.dir/build.make CMakeFiles/assign1.dir/mem_2.c.i
+.PHONY : mem_2.c.i
+
+mem_2.s: mem_2.c.s
+
+.PHONY : mem_2.s
+
+# target to generate assembly for a file
+mem_2.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/assign1.dir/build.make CMakeFiles/assign1.dir/mem_2.c.s
+.PHONY : mem_2.c.s
+
+mem_3.o: mem_3.c.o
+
+.PHONY : mem_3.o
+
+# target to build an object file
+mem_3.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/assign1.dir/build.make CMakeFiles/assign1.dir/mem_3.c.o
+.PHONY : mem_3.c.o
+
+mem_3.i: mem_3.c.i
+
+.PHONY : mem_3.i
+
+# target to preprocess a source file
+mem_3.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/assign1.dir/build.make CMakeFiles/assign1.dir/mem_3.c.i
+.PHONY : mem_3.c.i
+
+mem_3.s: mem_3.c.s
+
+.PHONY : mem_3.s
+
+# target to generate assembly for a file
+mem_3.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/assign1.dir/build.make CMakeFiles/assign1.dir/mem_3.c.s
+.PHONY : mem_3.c.s
+
 memlayout.o: memlayout.c.o
 
 .PHONY : memlayout.o
@@ -208,6 +262,12 @@ help:
 	@echo "... mem_1.o"
 	@echo "... mem_1.i"
 	@echo "... mem_1.s"
+	@echo "... mem_2.o"
+	@echo "... mem_2.i"
+	@echo "... mem_2.s"
+	@echo "... mem_3.o"
+	@echo "... mem_3.i"
+	@echo "... mem_3.s"
 	@echo "... memlayout.o"
 	@echo "... memlayout.i"
 	@echo "... memlayout.s"

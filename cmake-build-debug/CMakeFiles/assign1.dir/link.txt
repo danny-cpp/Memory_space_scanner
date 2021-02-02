@@ -1,1 +1,1 @@
-/usr/bin/cc -g CMakeFiles/assign1.dir/mem_1.c.o CMakeFiles/assign1.dir/memlayout.c.o -o assign1 
+/usr/bin/cc -g CMakeFiles/assign1.dir/mem_1.c.o CMakeFiles/assign1.dir/mem_2.c.o CMakeFiles/assign1.dir/mem_3.c.o CMakeFiles/assign1.dir/memlayout.c.o -o assign1 

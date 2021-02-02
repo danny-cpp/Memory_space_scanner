@@ -93,12 +93,12 @@ clean: CMakeFiles/assign1.dir/clean
 CMakeFiles/assign1.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/assign1.dir/build.make CMakeFiles/assign1.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/assign1.dir/build.make CMakeFiles/assign1.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/d/Study/DEV/C/assign1/cmake-build-debug/CMakeFiles --progress-num=1,2,3 "Built target assign1"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/d/Study/DEV/C/assign1/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5 "Built target assign1"
 .PHONY : CMakeFiles/assign1.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/assign1.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/d/Study/DEV/C/assign1/cmake-build-debug/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/d/Study/DEV/C/assign1/cmake-build-debug/CMakeFiles 5
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/assign1.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/d/Study/DEV/C/assign1/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/assign1.dir/rule

@@ -7,5 +7,7 @@ include_directories(.)
 
 add_executable(assign1
         mem_1.c
+        mem_2.c
+        mem_3.c
         memlayout.c
         memlayout.h)

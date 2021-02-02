@@ -5,6 +5,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
   "/mnt/d/Study/DEV/C/assign1/mem_1.c" "/mnt/d/Study/DEV/C/assign1/cmake-build-debug/CMakeFiles/assign1.dir/mem_1.c.o"
+  "/mnt/d/Study/DEV/C/assign1/mem_2.c" "/mnt/d/Study/DEV/C/assign1/cmake-build-debug/CMakeFiles/assign1.dir/mem_2.c.o"
+  "/mnt/d/Study/DEV/C/assign1/mem_3.c" "/mnt/d/Study/DEV/C/assign1/cmake-build-debug/CMakeFiles/assign1.dir/mem_3.c.o"
   "/mnt/d/Study/DEV/C/assign1/memlayout.c" "/mnt/d/Study/DEV/C/assign1/cmake-build-debug/CMakeFiles/assign1.dir/memlayout.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
