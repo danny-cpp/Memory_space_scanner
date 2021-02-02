@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <dlfcn.h>
 #include "memlayout.h"
 
+static void *handle;
+struct memregion* after;
+int array_size;
 
-static struct memregion* result_array;
-static unsigned int array_size;
-static struct memregion* recursion_array;
+void dynamicLoadingExample();
 
 int recursionExample(int upto) {
     if (upto == 0) {
@@ -34,48 +36,33 @@ int recursionExample(int upto) {
 int main() {
 
     array_size = 20;
-    result_array = (struct memregion*)malloc(array_size * sizeof(struct memregion));
-    recursion_array = (struct memregion*)malloc(array_size * sizeof(struct memregion));
+    struct memregion* before = (struct memregion*)malloc(array_size * sizeof(struct memregion));
+    after = (struct memregion*)malloc(array_size * sizeof(struct memregion));
 
-    printf("\nMalloc Successfully\n");
     printf("========================\n");
-    printf("Memory before recursion is:\n");
-    get_mem_layout(result_array, array_size);
+    printf("Memory before dynamic load is:\n");
+
+    get_mem_layout(before, array_size);
+    for (unsigned int i = 0; i < array_size; i++) {
+        print_memregion(before[i]);
+    }
+
+    dynamicLoadingExample();
+
+
 
     for (unsigned int i = 0; i < array_size; i++) {
-        print_memregion(result_array[i]);
+        print_memregion(after[i]);
     }
 
-    int upto = 10;
-    // int result = recursionExample(upto);
+    memregion_compare(after, before, array_size);
+}
 
-    {
-        int a[10000];
-        for (int i = 0; i < 10000; ++i) {
-            a[i] = 10;
-        }
-        printf("\nRescan attempt\n");
-        get_mem_layout(recursion_array, array_size);
-    }
-
-    memregion_compare( recursion_array, result_array, array_size);
-
-    // int status = get_mem_layout(results, array_size);
-    // for (unsigned int i = 0; i < array_size; i++) {
-    //     print_memregion(results[i]);
-    // }
-    //
-    // printf("\nMemory after massive malloc:\n");
-    //
-    // int* d = (int*)malloc(1000000*sizeof(int));
-    // for (unsigned long i = 0; i < 1000000; i++) {
-    //     d[i] = 1;
-    // }
-    //
-    //
-    // get_mem_layout(results, array_size);
-    // for (unsigned int i = 0; i < array_size; i++) {
-    //     print_memregion(results[i]);
-    // }
-
+void dynamicLoadingExample() {
+    double (*cosine)(double);
+    handle = dlopen("/usr/lib32/libm.so", RTLD_LAZY);
+    *(void **)(&cosine) = dlsym(handle, "cos");
+    printf("%f\n", (*cosine)(0.0));
+    get_mem_layout(after, array_size);
+    dlclose(handle);
 }

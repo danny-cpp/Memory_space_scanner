@@ -10,10 +10,10 @@ mem_1.o: mem_1.c
 	$(CC) -c mem_1.c -o mem_1.o $(CFLAGS)
 
 mem_2: mem_2.o memlayout.o
-	$(CC) -o mem_2 mem_2.o memlayout.o $(CFLAGS)
+	$(CC) -o mem_2 mem_2.o memlayout.o $(CFLAGS) -ldl
 
 mem_2.o: mem_2.c
-	$(CC) -c mem_2.c -o mem_2.o $(CFLAGS)
+	$(CC) -c mem_2.c -o mem_2.o $(CFLAGS) -ldl
 
 mem_3: mem_3.o memlayout.o
 	$(CC) -o mem_3 mem_3.o memlayout.o $(CFLAGS)
