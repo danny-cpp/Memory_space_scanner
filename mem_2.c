@@ -50,7 +50,10 @@ void dynamicLoadingExample() {
     double (*cosine)(double);
     handle = dlopen("/usr/lib32/libm.so", RTLD_LAZY);
     *(void **)(&cosine) = dlsym(handle, "cos");
-    printf("%f\n", (*cosine)(0.0));
+    printf("\nTesting DL with cosine function...");
+    printf("Cosine of 0 : %f\n", (*cosine)(0.0));
+    printf("Test run successfully");
+    printf("Memory after DL");
     get_mem_layout(after, array_size);
     dlclose(handle);
 }
