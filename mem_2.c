@@ -52,8 +52,8 @@ void dynamicLoadingExample() {
     *(void **)(&cosine) = dlsym(handle, "cos");
     printf("\nTesting DL with cosine function...");
     printf("Cosine of 0 : %f\n", (*cosine)(0.0));
-    printf("Test run successfully");
-    printf("Memory after DL");
+    printf("Test run successfully\n");
+    printf("Memory after DL\n");
     get_mem_layout(after, array_size);
     dlclose(handle);
 }
